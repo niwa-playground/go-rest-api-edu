@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 
+	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/go-playground/validator"
 	"github.com/imniwa/go-rest-api-edu/app"
 	"github.com/imniwa/go-rest-api-edu/controller"
