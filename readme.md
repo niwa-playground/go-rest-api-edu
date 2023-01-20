@@ -38,6 +38,6 @@ go get https://github.com/julienschmidt/httprouter
 
 go get https://github.com/go-playground/validator
 ```
-> Opsi -u menginstruksikan perintah `get` untuk mengupdate modul yang menyediakan dependency yang disebutkan pada baris perintah untuk menggunakan rilis minor atau patch yang lebih baru jika tersedia.
+> opsi -u menginstruksikan perintah `get` untuk mengupdate modul yang menyediakan dependency yang disebutkan pada baris perintah untuk menggunakan rilis minor atau patch yang lebih baru jika tersedia.
 
 
