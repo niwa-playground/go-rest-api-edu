@@ -9,27 +9,33 @@
 3. [go-playground/validator](https://github.com/go-playground/validator)
 
 <br>
-<br>
 
-### *Outline project* :
- 1. [Setup **Project**](#setup-project)
- 2. Membuat _Database_
- 3. Membuat _CRUD_
- 4. Membuat _Router Server_
+### Table of content :
+- [**RestAPI Educational**](#restapi-educational)
+    - [*Depedency* :](#depedency-)
+    - [Table of content :](#table-of-content-)
+  - [**Setup Project**](#setup-project)
+      - [menginisialisasi project `go`.](#menginisialisasi-project-go)
+      - [menambahkan beberapa depedency.](#menambahkan-beberapa-depedency)
+  - [**Membuat Database**](#membuat-database)
+      - [membuat database `test_golang_api`](#membuat-database-test_golang_api)
+      - [membuat tabel `category`](#membuat-tabel-category)
+  - [**Membuat CRUD**](#membuat-crud)
+      - [Membuat Entity \[`model/entity`\]](#membuat-entity-modelentity)
+    - [Membuat Repository \[`repository/*`\]](#membuat-repository-repository)
 
-<br>
 <br>
 
 ## **Setup Project**
 ---
-menginisialisasi project `go`.
+#### menginisialisasi project `go`.
 
 ```
 go mod init <nama-project>
 go mod init github.com/imniwa/go-rest-api-edu
 ```
 
-menambahkan beberapa depedency.
+#### menambahkan beberapa depedency.
 ```
 go get -u github.com/go-sql-driver/mysql
 go get github.com/julienschmidt/httprouter
@@ -38,3 +44,51 @@ go get github.com/go-playground/validator
 > opsi -u menginstruksikan perintah `get` untuk mengupdate modul yang menyediakan dependency yang disebutkan pada baris perintah untuk menggunakan rilis minor atau patch yang lebih baru jika tersedia.
 
 
+## **Membuat Database**
+---
+#### membuat database `test_golang_api`
+```sql
+CREATE DATABASE test_golang_api 
+```
+
+#### membuat tabel `category`
+```sql
+CREATE TABLE category(
+    id integer primary key auto_increment,
+    name varchar(200) not null
+)engine=InnoDB
+```
+
+## **Membuat CRUD**
+---
+
+
+#### Membuat Entity [`model/entity`]
+---
+kelas entity ini akan kita masukan ke dalam directory `model\entity` didalam folder ini. untuk setiap tabel kita perlu representasikan ke dalam data struct. 
+```go
+type Category struct {
+    Id      int
+    Name    string
+}
+```
+
+<br>
+
+### Membuat Repository [`repository/*`]
+---
+sebelum membuat repository untuk `category` kita perlu membuat `interface`-nya terlebih dahulu.
+```go
+type BaseCategoryRepository interface {
+	Save(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category
+	Update(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category
+	Delete(ctx context.Context, tx *sql.Tx, category entity.Category)
+	FindById(ctx context.Context, tx *sql.Tx, categoryId int) entity.Category
+	FindAll(ctx context.Context, tx *sql.Tx) []entity.Category
+}
+```
+
+setelah itu baru kita implementasikan `interface` yang sudah dibuat ke dalam `<nama-table>_repository.go`.
+```go
+
+```
