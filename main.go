@@ -1,9 +1,12 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/go-playground/validator"
 	"github.com/imniwa/go-rest-api-edu/app"
 	"github.com/imniwa/go-rest-api-edu/controller"
+	"github.com/imniwa/go-rest-api-edu/helper"
 	repository "github.com/imniwa/go-rest-api-edu/repositories"
 	service "github.com/imniwa/go-rest-api-edu/services"
 	"github.com/julienschmidt/httprouter"
@@ -24,4 +27,12 @@ func main() {
 	router.POST("/api/categories", categoryController.Create)
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
+
+	server := http.Server{
+		Addr:    ":3000",
+		Handler: router,
+	}
+
+	err := server.ListenAndServe()
+	helper.PanicIfError(err)
 }
