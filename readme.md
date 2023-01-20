@@ -1,3 +1,7 @@
+⚠️ Under Development
+
+---
+
 # **RestAPI Educational**
 &nbsp; jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestAPI` dengan menggunakan bahasa `go`.
 
@@ -25,6 +29,10 @@
   - [Membuat Repository \[`repository/*`\]](#membuat-repository-repository)
     - [Implementasi `func Save()`](#implementasi-func-save)
     - [Menambahkan Helper untuk menghandle `panic`](#menambahkan-helper-untuk-menghandle-panic)
+    - [Implementasi `func Update()`](#implementasi-func-update)
+    - [Implementasi `func Delete()`](#implementasi-func-delete)
+    - [Implementasi `func FindById()`](#implementasi-func-findbyid)
+    - [Implementasi `func FindAll()`](#implementasi-func-findall)
 
 <br>
 
@@ -95,16 +103,16 @@ setelah itu baru kita implementasikan `interface` yang sudah dibuat ke dalam `<n
 ### Implementasi `func Save()`
 ```go
 func (repository *CategoryRepository) Save(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category {
-	SQL := "INSERT INTO category(name) values (?)"
-	
+    SQL := "INSERT INTO category(name) values (?)"
+        
     result, err := tx.ExecContext(ctx, SQL, category.Name)
-	helper.PanicIfError(err)
-
-	id, err := result.LastInsertId()
     helper.PanicIfError(err)
 
-	category.Id = int(id)
-	return category
+    id, err := result.LastInsertId()
+    helper.PanicIfError(err)
+
+    category.Id = int(id)
+    return category
 }
 ```
 
@@ -119,3 +127,8 @@ func PanicIfError(err error) {
 	}
 }
 ```
+
+### Implementasi `func Update()`
+### Implementasi `func Delete()`
+### Implementasi `func FindById()`
+### Implementasi `func FindAll()`
