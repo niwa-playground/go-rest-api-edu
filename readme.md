@@ -3,7 +3,7 @@
 ---
 
 # **RestAPI Educational**
-&nbsp; jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestAPI` dengan menggunakan bahasa `go`.
+jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestAPI` dengan menggunakan bahasa `go`.
 
 <br>
 
