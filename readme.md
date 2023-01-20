@@ -26,17 +26,14 @@ menginisialisasi project `go`.
 
 ```
 go mod init <nama-project>
-
 go mod init github.com/imniwa/go-rest-api-edu
 ```
 
 menambahkan beberapa depedency.
 ```
-go get -u https://github.com/go-sql-driver/mysql
-
-go get https://github.com/julienschmidt/httprouter
-
-go get https://github.com/go-playground/validator
+go get -u github.com/go-sql-driver/mysql
+go get github.com/julienschmidt/httprouter
+go get github.com/go-playground/validator
 ```
 > opsi -u menginstruksikan perintah `get` untuk mengupdate modul yang menyediakan dependency yang disebutkan pada baris perintah untuk menggunakan rilis minor atau patch yang lebih baru jika tersedia.
 
