@@ -1,22 +1,27 @@
-package service
+package services
 
 import (
 	"context"
 	"database/sql"
 
+	"github.com/go-playground/validator"
 	"github.com/imniwa/go-rest-api-edu/helper"
 	"github.com/imniwa/go-rest-api-edu/model/entity"
 	"github.com/imniwa/go-rest-api-edu/model/request"
 	"github.com/imniwa/go-rest-api-edu/model/response"
-	"github.com/imniwa/go-rest-api-edu/repository"
+	repository "github.com/imniwa/go-rest-api-edu/repositories"
 )
 
 type CategoryService struct {
 	Repository repository.CategoryRepository
 	DB         *sql.DB
+	Validate   *validator.Validate
 }
 
 func (service *CategoryService) Create(ctx context.Context, request request.CategoryCreateRequest) response.CategoryResponse {
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
@@ -31,6 +36,9 @@ func (service *CategoryService) Create(ctx context.Context, request request.Cate
 }
 
 func (service *CategoryService) Update(ctx context.Context, request request.CategoryUpdateRequest) response.CategoryResponse {
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)

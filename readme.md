@@ -2,7 +2,7 @@
 
 ---
 
-# **RestAPI Educational**
+# **Simple RestAPI [EDU]**
 jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestAPI` dengan menggunakan bahasa `go`.
 
 <br>
@@ -15,7 +15,7 @@ jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestA
 <br>
 
 ### Table of content :
-- [**RestAPI Educational**](#restapi-educational)
+- [**Simple RestAPI \[EDU\]**](#simple-restapi-edu)
     - [*Depedency* :](#depedency-)
     - [Table of content :](#table-of-content-)
 - [**Setup Project**](#setup-project)
@@ -33,6 +33,7 @@ jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestA
     - [Implementasi `func Delete()`](#implementasi-func-delete)
     - [Implementasi `func FindById()`](#implementasi-func-findbyid)
     - [Implementasi `func FindAll()`](#implementasi-func-findall)
+  - [Membuat Service \[`service/*`\]](#membuat-service-service)
 
 <br>
 
@@ -132,3 +133,5 @@ func PanicIfError(err error) {
 ### Implementasi `func Delete()`
 ### Implementasi `func FindById()`
 ### Implementasi `func FindAll()`
+
+## Membuat Service [`service/*`]
