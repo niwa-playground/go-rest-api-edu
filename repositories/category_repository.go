@@ -12,6 +12,10 @@ import (
 type CategoryRepository struct {
 }
 
+func NewCategoryRepository() BaseCategoryRepository {
+	return &CategoryRepository{}
+}
+
 func (repository *CategoryRepository) Save(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category {
 	SQL := "INSERT INTO category(name) values (?)"
 

@@ -12,7 +12,13 @@ import (
 )
 
 type CategoryController struct {
-	Service service.CategoryService
+	Service service.BaseCategoryService
+}
+
+func NewCategoryController(services service.BaseCategoryService) BaseCategoryController {
+	return &CategoryController{
+		Service: services,
+	}
 }
 
 func (controller *CategoryController) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
