@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -17,10 +16,8 @@ type CategoryController struct {
 }
 
 func (controller *CategoryController) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	decoder := json.NewDecoder(request.Body)
 	categoryCreateRequest := modelRequest.CategoryCreateRequest{}
-	err := decoder.Decode(&categoryCreateRequest)
-	helper.PanicIfError(err)
+	helper.ReadFromRequestBody(request, &categoryCreateRequest)
 
 	categoryResponse := controller.Service.Create(request.Context(), categoryCreateRequest)
 	webResponse := response.WebResponse{
@@ -28,17 +25,12 @@ func (controller *CategoryController) Create(writer http.ResponseWriter, request
 		Status: "OK",
 		Data:   categoryResponse,
 	}
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err = encoder.Encode(webResponse)
-	helper.PanicIfError(err)
+	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller *CategoryController) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	decoder := json.NewDecoder(request.Body)
 	CategoryUpdateRequest := modelRequest.CategoryUpdateRequest{}
-	err := decoder.Decode(&CategoryUpdateRequest)
-	helper.PanicIfError(err)
+	helper.ReadFromRequestBody(request, &CategoryUpdateRequest)
 
 	categoryId := params.ByName("categoryId")
 	id, err := strconv.Atoi(categoryId)
@@ -52,10 +44,7 @@ func (controller *CategoryController) Update(writer http.ResponseWriter, request
 		Status: "OK",
 		Data:   categoryResponse,
 	}
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err = encoder.Encode(webResponse)
-	helper.PanicIfError(err)
+	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller *CategoryController) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -68,10 +57,7 @@ func (controller *CategoryController) Delete(writer http.ResponseWriter, request
 		Code:   200,
 		Status: "OK",
 	}
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err = encoder.Encode(webResponse)
-	helper.PanicIfError(err)
+	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller *CategoryController) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -85,10 +71,7 @@ func (controller *CategoryController) FindById(writer http.ResponseWriter, reque
 		Status: "OK",
 		Data:   categoryResponse,
 	}
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err = encoder.Encode(webResponse)
-	helper.PanicIfError(err)
+	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller *CategoryController) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -98,8 +81,5 @@ func (controller *CategoryController) FindAll(writer http.ResponseWriter, reques
 		Status: "OK",
 		Data:   categoryResponses,
 	}
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err := encoder.Encode(webResponse)
-	helper.PanicIfError(err)
+	helper.WriteToResponseBody(writer, webResponse)
 }
