@@ -8,7 +8,9 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/imniwa/go-rest-api-edu/app"
 	"github.com/imniwa/go-rest-api-edu/controller"
+	"github.com/imniwa/go-rest-api-edu/exception"
 	"github.com/imniwa/go-rest-api-edu/helper"
+	"github.com/imniwa/go-rest-api-edu/middleware"
 	repository "github.com/imniwa/go-rest-api-edu/repositories"
 	service "github.com/imniwa/go-rest-api-edu/services"
 	"github.com/julienschmidt/httprouter"
@@ -30,9 +32,11 @@ func main() {
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
 
+	router.PanicHandler = exception.ErrorHandler
+
 	server := http.Server{
 		Addr:    ":3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
