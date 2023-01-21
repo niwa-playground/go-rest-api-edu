@@ -24,16 +24,7 @@ jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestA
 - [**Membuat Database**](#membuat-database)
   - [membuat database `test_golang_api`](#membuat-database-test_golang_api)
   - [membuat tabel `category`](#membuat-tabel-category)
-- [**Membuat CRUD**](#membuat-crud)
-  - [Membuat Entity \[`model/entity`\]](#membuat-entity-modelentity)
-  - [Membuat Repository \[`repository/*`\]](#membuat-repository-repository)
-    - [Implementasi `func Save()`](#implementasi-func-save)
-    - [Menambahkan Helper untuk menghandle `panic`](#menambahkan-helper-untuk-menghandle-panic)
-    - [Implementasi `func Update()`](#implementasi-func-update)
-    - [Implementasi `func Delete()`](#implementasi-func-delete)
-    - [Implementasi `func FindById()`](#implementasi-func-findbyid)
-    - [Implementasi `func FindAll()`](#implementasi-func-findall)
-  - [Membuat Service \[`service/*`\]](#membuat-service-service)
+- [**Struktur Project**](#struktur-project)
 
 <br>
 
@@ -70,68 +61,17 @@ CREATE TABLE category(
 )engine=InnoDB
 ```
 
-# **Membuat CRUD**
----
-
-
-## Membuat Entity [`model/entity`]
----
-kelas entity ini akan kita masukan ke dalam directory `model\entity` didalam folder ini. untuk setiap tabel kita perlu representasikan ke dalam data struct. 
-```go
-type Category struct {
-    Id      int
-    Name    string
-}
-```
-
-<br>
-
-## Membuat Repository [`repository/*`]
----
-sebelum membuat repository untuk `category` kita perlu membuat `interface`-nya terlebih dahulu.
-```go
-type BaseCategoryRepository interface {
-	Save(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category
-	Update(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category
-	Delete(ctx context.Context, tx *sql.Tx, category entity.Category)
-	FindById(ctx context.Context, tx *sql.Tx, categoryId int) entity.Category
-	FindAll(ctx context.Context, tx *sql.Tx) []entity.Category
-}
-```
-
-setelah itu baru kita implementasikan `interface` yang sudah dibuat ke dalam `<nama-table>_repository.go`.
-
-### Implementasi `func Save()`
-```go
-func (repository *CategoryRepository) Save(ctx context.Context, tx *sql.Tx, category entity.Category) entity.Category {
-    SQL := "INSERT INTO category(name) values (?)"
-        
-    result, err := tx.ExecContext(ctx, SQL, category.Name)
-    helper.PanicIfError(err)
-
-    id, err := result.LastInsertId()
-    helper.PanicIfError(err)
-
-    category.Id = int(id)
-    return category
-}
-```
-
-### Menambahkan Helper untuk menghandle `panic`
-fungsi ini berguna untuk mengecek jika terjadi error dalam pemanggilan fungsi. 
-
-untuk directory file akan aku simpan ke dalam `helper/error.go`.
-```go
-func PanicIfError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-```
-
-### Implementasi `func Update()`
-### Implementasi `func Delete()`
-### Implementasi `func FindById()`
-### Implementasi `func FindAll()`
-
-## Membuat Service [`service/*`]
+# **Struktur Project**
+struktur project kurang lebih sebagai berikut :
+1. [`app/database.go`]  berisikan file untuk membuat koneksi dengan database.
+2. [`controller/controller.go`] berisikan `interface` untuk setiap model.
+3. [`controller/*`] berisikan file untuk controller yang mengatur setiap model,berdasarkan `interface` yang sudah dibuat.
+4. [`exception/*`] berisikan exception untuk manghandle error.
+5. [`helper/*`] berisikan kumpulan function - function tambahan yang perlu diimplementasikan di setiap file.
+6. [`middleware/*`] berisikan middleware untuk mengatur authentication.
+7. [`model/*`] berisikan 3 jenis model yaitu :
+   - `entity`  digunakan untuk membuat model setiap tabel.
+   - `request` digunakan untuk membuat `struct` request untuk `http`.
+   - `response` digunakan untuk membuat `struct` response untuk `http`.
+8. [`repositories/*`] berisikan file untuk melakukan SQL query ke database.
+9. [`services/*`] berisikan file untuk memanggil repository.
