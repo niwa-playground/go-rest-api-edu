@@ -1,7 +1,3 @@
-⚠️ Under Development
-
----
-
 # **Simple RestAPI [EDU]**
 jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestAPI` dengan menggunakan bahasa `go`.
 
@@ -25,6 +21,7 @@ jadi pada repository ini aku akan membagikan pengalamanku dalam membangun `RestA
   - [membuat database `test_golang_api`](#membuat-database-test_golang_api)
   - [membuat tabel `category`](#membuat-tabel-category)
 - [**Struktur Project**](#struktur-project)
+- [**Penjelasan**](#penjelasan)
 
 <br>
 
@@ -75,3 +72,8 @@ struktur project kurang lebih sebagai berikut :
    - `response` digunakan untuk membuat `struct` response untuk `http`.
 8. [`repositories/*`] berisikan file untuk melakukan SQL query ke database.
 9. [`services/*`] berisikan file untuk memanggil repository.
+
+# **Penjelasan**
+1. `repositories` file ini digunakan untuk melakukan memanggilan Query ke database dengan cara mengeksekusi Context dari libary context.
+2. `services` file ini digunakan untuk melakukan validasi terhadap request dan melakukan commit terhadap query yang dieksekusi pada `repositories` jika query berhasil dilakukan dan jika gagal maka akan dilakukan rollback.
+3. `model entity` file ini digunakan untuk membuat aturan untuk penggunaan tabel di database sebagai model.
