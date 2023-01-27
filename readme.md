@@ -78,3 +78,4 @@ struktur project kurang lebih sebagai berikut :
 2. `services` file ini digunakan untuk melakukan validasi terhadap request dan melakukan commit terhadap query yang dieksekusi pada `repositories` jika query berhasil dilakukan dan jika gagal maka akan dilakukan rollback.
 3. `model entity` file ini digunakan untuk membuat aturan untuk penggunaan tabel di database sebagai model.
 4. `helper` pada directoryi ini berisikan kumpulan function untuk mengurangi penggunaan kode yang sama didalam project, sehingga hanya tinggal memanggil function yang sama tanpa harus menulis ulang kode tersebut.
+5. `exception` berisikan function untuk menghandle error, dari error karena validasi, internal server error, dan lainnya.
