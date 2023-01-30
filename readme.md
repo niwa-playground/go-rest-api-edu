@@ -80,3 +80,4 @@ struktur project kurang lebih sebagai berikut :
 4. `helper` pada directoryi ini berisikan kumpulan function untuk mengurangi penggunaan kode yang sama didalam project, sehingga hanya tinggal memanggil function yang sama tanpa harus menulis ulang kode tersebut.
 5. `exception` berisikan function untuk menghandle error, dari error karena validasi, internal server error, dan lainnya.
 6. `controller` berfungsi untuk menjawab setiap request yang diberikan ke server.
+7. `app/database.go` berisikan konfigurasi database.
