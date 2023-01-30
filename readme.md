@@ -74,10 +74,11 @@ struktur project kurang lebih sebagai berikut :
 9. [`services/*`] berisikan file untuk memanggil repository.
 
 # **Penjelasan**
-1. `repositories` file ini digunakan untuk melakukan memanggilan Query ke database dengan cara mengeksekusi Context dari libary context.
-2. `services` file ini digunakan untuk melakukan validasi terhadap request dan melakukan commit terhadap query yang dieksekusi pada `repositories` jika query berhasil dilakukan dan jika gagal maka akan dilakukan rollback.
-3. `model entity` file ini digunakan untuk membuat aturan untuk penggunaan tabel di database sebagai model.
-4. `helper` pada directoryi ini berisikan kumpulan function untuk mengurangi penggunaan kode yang sama didalam project, sehingga hanya tinggal memanggil function yang sama tanpa harus menulis ulang kode tersebut.
-5. `exception` berisikan function untuk menghandle error, dari error karena validasi, internal server error, dan lainnya.
-6. `controller` berfungsi untuk menjawab setiap request yang diberikan ke server.
-7. `app/database.go` berisikan konfigurasi database.
+1. `repositories` directory ini digunakan untuk melakukan memanggilan Query ke database dengan cara mengeksekusi Context dari libary context.
+2. `services` directory ini digunakan untuk melakukan validasi terhadap request dan melakukan commit terhadap query yang dieksekusi pada `repositories` jika query berhasil dilakukan dan jika gagal maka akan dilakukan rollback.
+3.  `model/entity` directory ini digunakan untuk membuat aturan pada penggunaan tabel di database sebagai model.
+4. `model/request` directory ini digunakan untuk membuat aturan pada penggunaan setiap request yang dikirim.
+5. `helper` pada directoryi ini berisikan kumpulan function untuk mengurangi penggunaan kode yang sama didalam project, sehingga hanya tinggal memanggil function yang sama tanpa harus menulis ulang kode tersebut.
+6. `exception` berisikan function untuk menghandle error, dari error karena validasi, internal server error, dan lainnya.
+7. `controller` berfungsi untuk menjawab setiap request yang diberikan ke server.
+8. `app/database.go` berisikan konfigurasi database.
